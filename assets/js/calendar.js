@@ -1,0 +1,2 @@
+document.querySelectorAll('.calendar-day').forEach(day=>{day.addEventListener('click',function(e){const link=this.querySelector('.day-number a');if(link&&!e.target.closest('a')) link.click();});});
+setTimeout(()=>{document.querySelectorAll('.alert').forEach(el=>el.style.opacity='0');},3000);

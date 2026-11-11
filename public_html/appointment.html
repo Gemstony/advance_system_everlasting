@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Contact & Appointments - Everlasting Academy</title>
+  <meta name="description" content="Contact Everlasting Academy or schedule an appointment for consultation, enrollment, or a campus tour.">
+  <meta name="keywords" content="Everlasting Academy, Contact, Appointment, Misigusugu, Kibaha">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Leaflet (OpenStreetMap) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-sA+e2uDt1wM+fG0v1n5g2w0Q4rY9v4q0t6q6H6O7F2o=" crossorigin="" />
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .contact-actions .btn { margin-right: 0.5rem; margin-bottom: 0.5rem; }
+    .map-container { position: relative; margin-top: 1.5rem; }
+    .map-actions {
+      position: absolute; z-index: 10; right: 1.25rem; top: 1.25rem;
+      display:flex; gap:.5rem; flex-wrap:wrap;
+    }
+    .contact-info .btn-contact { display: inline-flex; align-items: center; gap: .5rem; }
+    .social-buttons .btn { margin-right: 0.5rem; }
+    #leafletMap { width:100%; height:500px; border-radius:6px; border:1px solid #e6e6e6; }
+    .copy-btn { cursor:pointer; }
+    .sr-hidden { position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden; }
+    @media (max-width: 767px) { .map-actions { position: static; margin-top: .75rem; text-align: center; } }
+  </style>
+</head>
+
+<body class="contact-page">
+
+  <!-- Header (unchanged) -->
+  <?php include "partials/header.php"; ?>
+
+  <main class="main" id="maincontent" tabindex="-1">
+    <div class="page-title">
+      <div class="heading">
+        <div class="container text-center">
+          <h1 class="heading-title">Contact & Appointments</h1>
+          <p class="mb-0">Reach out to us or schedule an appointment — we’re ready to assist you.</p>
+        </div>
+      </div>
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <div class="container"><ol><li><a href="index.html">Home</a></li><li class="current" aria-current="page">Contact & Appointments</li></ol></div>
+      </nav>
+    </div>
+
+    <section id="contact" class="contact section">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row g-5">
+
+          <!-- Contact Info -->
+          <div class="col-lg-5">
+            <div class="contact-info-wrapper">
+              <div class="contact-info-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="info-icon"><i class="bi bi-geo-alt"></i></div>
+                <div class="info-content">
+                  <h3>Address</h3>
+                  <p>Misigusugu, Kibaha, Pwani — Tanzania</p>
+                </div>
+              </div>
+
+              <div class="contact-info-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="info-icon"><i class="bi bi-envelope"></i></div>
+                <div class="info-content">
+                  <h3>Email</h3>
+                  <p><a href="mailto:everlastingacademy24@gmail.com" class="btn btn-primary btn-sm"><i class="bi bi-envelope-fill"></i> everlastingacademy24@gmail.com</a></p>
+                </div>
+              </div>
+
+              <div class="contact-info-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="info-icon"><i class="bi bi-headset"></i></div>
+                <div class="info-content">
+                  <h3>Hours</h3>
+                  <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+                  <p>Saturday: 9:00 AM - 1:00 PM</p>
+                </div>
+              </div>
+
+              <div class="mt-4 contact-actions" data-aos="fade-up" data-aos-delay="350">
+               <a href="https://www.facebook.com/share/p/1BFGU5zh4M/" class="facebook"><i class="bi bi-facebook"></i></a>
+          <a href="https://www.instagram.com/everlasting_academy2024/" class="instagram"><i class="bi bi-instagram"></i></a>
+          <a href="https://youtube.com/shorts/qftJ_Pb076Q?si=QqLZbwj1N-vvxyVX" class="youtube"><i class="bi bi-youtube"></i></a>
+            </div>
+            </div>
+          </div>
+
+          <!-- Appointment & Contact Form -->
+          <div class="col-lg-7">
+            <div class="contact-form-card" data-aos="fade-up" data-aos-delay="200">
+              <h2>Book an Appointment or Send a Message</h2>
+              <p class="mb-4">Choose your appointment type, preferred date & time, or simply leave us a message.</p>
+              <form action="forms/appointment.php" method="post" class="php-email-form" id="appointmentForm" novalidate>
+                <div class="row g-4">
+                  <div class="col-md-6"><input type="text" class="form-control" name="name" id="name" placeholder="Your Name" required></div>
+                  <div class="col-md-6"><input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required></div>
+                  <div class="col-md-6">
+                    <select class="form-select" name="appointment_type" id="appointment_type" required>
+                      <option value="" disabled selected>Select Appointment Type</option>
+                      <option value="Consultation">Consultation</option>
+                      <option value="Enrollment">Enrollment</option>
+                      <option value="Campus Tour">Campus Tour</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6"><input type="date" class="form-control" name="preferred_date" id="preferred_date" required></div>
+                  <div class="col-md-6"><input type="time" class="form-control" name="preferred_time" id="preferred_time" required></div>
+                  <div class="col-12"><textarea class="form-control" name="message" id="message" placeholder="Additional Message (optional)" rows="4"></textarea></div>
+                  
+                  <div class="col-12">
+                    <div class="loading d-none">Sending request...</div>
+                    <div class="error-message alert alert-danger d-none"></div>
+                    <div class="sent-message alert alert-success d-none">Your request has been sent. Thank you!</div>
+                  </div>
+
+                  <div class="col-12 d-flex align-items-center justify-content-between">
+                    <button type="submit" class="btn btn-submit">Submit</button>
+                    <div class="d-flex contact-actions">
+                      <a class="btn btn-outline-primary btn-sm" href="mailto:everlastingacademy24@gmail.com"><i class="bi bi-envelope-fill"></i> Email Us</a>
+                      <a class="btn btn-success btn-sm" href="https://wa.me/255719629304" target="_blank"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <p class="mt-3 small text-muted">By submitting you agree to be contacted by Everlasting Academy regarding your appointment or enquiry.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Map Section (unchanged) -->
+      <div class="container-fluid map-container" data-aos="fade-up" data-aos-delay="200">
+        <div class="map-overlay"></div>
+        <div class="map-actions">
+          <a class="btn btn-light btn-sm" id="openGMaps" target="_blank" href="https://www.google.com/maps/search/?api=1&query=-6.764933,38.8454086"><i class="bi bi-map"></i> Google Maps</a>
+          <a class="btn btn-outline-primary btn-sm" id="openAppleMaps" target="_blank" href="http://maps.apple.com/?ll=-6.764933,38.8454086"><i class="bi bi-apple"></i> Apple Maps</a>
+          <button class="btn btn-outline-secondary btn-sm" id="shareMapBtn"><i class="bi bi-share-fill"></i> Share</button>
+        </div>
+        <div id="leafletMap" aria-label="Everlasting Academy location map"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer (unchanged) -->
+  <?php include "partials/footer.php"; ?>
+
+  <a href="#!" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <div id="preloader" aria-hidden="true"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-3cGk3b2e3vZs6uJm6q2rZL8EwOQjvazm2uZdY0b2j3g=" crossorigin=""></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    (() => {
+      const PHONE = '+255719629304';
+      const LAT = -6.764933, LNG = 38.8454086;
+      const PLACE_NAME = 'Everlasting Academy';
+
+      // Copy phone
+      const copyBtn = document.getElementById('copyPhoneBtn');
+      copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(PHONE).then(() => {
+          copyBtn.innerHTML = '<i class="bi bi-clipboard-check"></i>';
+          setTimeout(() => copyBtn.innerHTML = '<i class="bi bi-clipboard"></i>', 2000);
+        }).catch(() => alert('Copy failed — please copy manually: ' + PHONE));
+      });
+
+      // Directions button
+      document.getElementById('getDirectionsBtn').addEventListener('click', () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(pos => {
+            const src = `${pos.coords.latitude},${pos.coords.longitude}`;
+            window.open(`https://www.google.com/maps/dir/?api=1&origin=${src}&destination=${LAT},${LNG}&travelmode=driving`, '_blank', 'noopener');
+          }, () => window.open(`https://www.google.com/maps/search/?api=1&query=${LAT},${LNG}`, '_blank', 'noopener'));
+        } else {
+          window.open(`https://www.google.com/maps/search/?api=1&query=${LAT},${LNG}`, '_blank', 'noopener');
+        }
+      });
+
+      // Share map
+      document.getElementById('shareMapBtn').addEventListener('click', async () => {
+        const url = `https://www.google.com/maps/search/?api=1&query=${LAT},${LNG}`;
+        if (navigator.share) {
+          try { await navigator.share({ title: PLACE_NAME, text: PLACE_NAME, url }); } catch (err) { console.log(err); }
+        } else {
+          navigator.clipboard.writeText(url).then(() => alert('Map link copied to clipboard'), () => prompt('Copy this link:', url));
+        }
+      });
+
+      // Leaflet map
+      try {
+        const map = L.map('leafletMap', { scrollWheelZoom: false }).setView([LAT, LNG], 16);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+        L.marker([LAT, LNG]).addTo(map).bindPopup(`<strong>${PLACE_NAME}</strong><br>Misigusugu, Kibaha`).openPopup();
+      } catch (e) { console.warn('Leaflet failed', e); }
+
+      // AJAX form submission for appointment
+      const form = document.getElementById('appointmentForm');
+      const loading = document.querySelector('.loading');
+      const errorBox = document.querySelector('.error-message');
+      const successBox = document.querySelector('.sent-message');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errorBox.classList.add('d-none'); successBox.classList.add('d-none');
+
+        const formData = new FormData(form);
+        if (!formData.get('name') || !formData.get('email') || !formData.get('appointment_type') || !formData.get('preferred_date') || !formData.get('preferred_time')) {
+          errorBox.textContent = 'Please complete all required fields before submitting.';
+          errorBox.classList.remove('d-none'); return;
+        }
+
+        loading.classList.remove('d-none');
+        try {
+          const res = await fetch(form.action, { method: form.method, body: formData, headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+          loading.classList.add('d-none');
+          let data = { success: false, message: 'Server error' };
+          const ct = res.headers.get('content-type') || '';
+          if (ct.includes('application/json')) { data = await res.json(); } else { const text = await res.text(); if (/success|sent|thank/i.test(text)) data = { success: true, message: 'Request sent!' }; else data.message = text.slice(0, 1000); }
+
+          if (data.success) { successBox.textContent = data.message; successBox.classList.remove('d-none'); form.reset(); }
+          else { errorBox.textContent = data.message; errorBox.classList.remove('d-none'); }
+        } catch (err) {
+          loading.classList.add('d-none');
+          if (confirm('Could not submit by AJAX. Submit normally instead?')) { form.removeEventListener('submit', arguments.callee); form.submit(); }
+        }
+      });
+
+      document.getElementById('maincontent').focus();
+      if (window.AOS) AOS.init();
+    })();
+  </script>
+
+</body>
+</html>

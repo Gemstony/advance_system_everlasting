@@ -1,0 +1,46 @@
+THIS IS THE API KEY FOR YOUTUBE OPENING FOR STUDENT VIDEO UPLOAD PAGE AIzaSyDVgsYMCY_dYxjFpZhblvkr2CS4ow3aADM
+
+Here is a short note summarising the YouTube API key integration:
+
+---
+
+## YouTube API Key – Purpose & Setup
+
+**What happened?**  
+We added a feature that allows teachers to add YouTube videos as teaching materials. When a teacher clicks “Add YouTube Video”, they can either paste a YouTube URL manually or click **“Browse YouTube”** to search for videos directly inside the system. The search function uses the **YouTube Data API v3** from Google.
+
+**What is the API key for?**  
+The API key authenticates the application to Google’s YouTube service. It is used exclusively in the **YouTube search modal** inside the teacher’s **`create_material.php`** page. Without a valid key, the “Browse YouTube” button will simply open YouTube in a new tab (fallback), but the manual URL paste still works.
+
+**Which page uses it?**  
+- `teacher/create_material.php` – the JavaScript code that calls `https://www.googleapis.com/youtube/v3/search` uses the API key to fetch video results.
+
+**How to get a YouTube API key?**  
+1. Go to [Google Cloud Console](https://console.cloud.google.com/).  
+2. Create a new project (or select an existing one).  
+3. Enable **YouTube Data API v3** from the “Library”.  
+4. Go to **Credentials** → **Create Credentials** → **API key**.  
+5. Copy the generated key.  
+6. (Optional but recommended) Restrict the key: under “API restrictions”, choose “Restrict key” and select only “YouTube Data API v3”.
+
+**How to use it in the system?**  
+1. Open `const/school.php` (or your main config file).  
+2. Add the constant:  
+   ```php
+   define('YOUTUBE_API_KEY', 'AIzaSy...'); // replace with your real key
+   ```  
+3. The key is automatically passed to the JavaScript in `create_material.php` via:  
+   ```php
+   const youtubeApiKey = <?php echo defined('YOUTUBE_API_KEY') ? json_encode(YOUTUBE_API_KEY) : 'null'; ?>;
+   ```  
+4. No further changes are needed. The YouTube search modal will now display search results.
+
+**Up to now (where we reached):**  
+- Teachers can select a class, subject, and term, then choose to upload a PDF, create a CSV quiz, or add a YouTube video.  
+- For YouTube videos, they can either paste a URL (manual) or open a search modal, find a video, and click “Select Video” – which fills the URL and title automatically.  
+- The video is saved in `tbl_video_materials` with the video ID, URL, title, and instructions.  
+- Students will be able to view these embedded videos (the student page still needs to be updated – that is the next step).
+
+---
+
+Let me know if you need a more detailed step‑by‑step guide for obtaining the API key.

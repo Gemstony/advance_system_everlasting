@@ -1,0 +1,14 @@
+.month-card{transition:all 0.3s ease;cursor:pointer;}
+.month-card:hover{transform:translateY(-8px) scale(1.02);background:rgba(255,255,255,0.2);box-shadow:0 20px 35px rgba(0,0,0,0.4);}
+.calendar-grid{background:rgba(255,255,255,0.05);backdrop-filter:blur(8px);border-radius:24px;padding:20px;}
+.calendar-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:12px;}
+.calendar-weekday{text-align:center;font-weight:600;padding:10px;background:rgba(255,255,255,0.1);border-radius:16px;}
+.calendar-days{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;}
+.calendar-day{background:rgba(255,255,255,0.05);border-radius:16px;padding:12px 6px;min-height:90px;transition:all 0.2s;position:relative;}
+.calendar-day.empty{background:transparent;}
+.calendar-day:hover{background:rgba(67,97,238,0.3);transform:scale(1.02);}
+.day-number{font-weight:bold;font-size:1.1rem;display:flex;justify-content:space-between;align-items:center;}
+.day-number a{color:white;text-decoration:none;}
+.event-markers{margin-top:8px;display:flex;gap:4px;flex-wrap:wrap;}
+.event-dot{width:12px;height:12px;border-radius:50%;display:inline-block;box-shadow:0 0 3px currentColor;}
+.event-count{background:#ef4444;border-radius:20px;padding:0px 6px;font-size:0.7rem;font-weight:bold;}

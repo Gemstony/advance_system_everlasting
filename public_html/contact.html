@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Contact - Everlasting Academy</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="Everlasting Academy, Contact, Misigusugu, Kibaha">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Leaflet (OpenStreetMap) for interactive map (no Google required) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-sA+e2uDt1wM+fG0v1n5g2w0Q4rY9v4q0t6q6H6O7F2o=" crossorigin="" />
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    /* small, non-invasive enhancements and added UI controls */
+    .contact-actions .btn { margin-right: 0.5rem; margin-bottom: 0.5rem; }
+    .map-container { position: relative; margin-top: 1.5rem; }
+    .map-actions {
+      position: absolute; z-index: 10; right: 1.25rem; top: 1.25rem;
+      display:flex; gap:.5rem; flex-wrap:wrap;
+    }
+    .contact-info .btn-contact { display: inline-flex; align-items: center; gap: .5rem; }
+    .social-buttons .btn { margin-right: 0.5rem; }
+    #leafletMap { width:100%; height:500px; border-radius:6px; border:1px solid #e6e6e6; }
+    .copy-btn { cursor:pointer; }
+    .sr-hidden { position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden; }
+    @media (max-width: 767px) { .map-actions { position: static; margin-top: .75rem; text-align: center; } }
+  </style>
+</head>
+
+<body class="contact-page">
+
+  <header id="header" class="header fixed-top">
+    <div class="topbar d-flex align-items-center dark-background">
+      <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="contact-info d-flex align-items-center">
+          <!-- email shown as clickable button -->
+          <i class="bi bi-envelope d-flex align-items-center">
+            <a class="btn btn-sm btn-outline-light btn-contact" href="mailto:everlastingacademy24@gmail.com">
+              <i class="bi bi-envelope-fill"></i>
+              everlastingacademy24@gmail.com
+            </a>
+          </i>
+
+          <!-- phone -->
+          <i class="bi bi-phone d-flex align-items-center ms-4">
+            <a class="btn btn-sm btn-outline-light btn-contact" id="telButton" href="tel:+255719629304">
+              <i class="bi bi-telephone-fill"></i>
+              +255 719 629 304
+            </a>
+            <!-- copy phone (for users who can't call directly on device) -->
+            <button class="btn btn-sm btn-outline-light ms-2 copy-btn" id="copyPhoneBtn" title="Copy phone number">
+              <i class="bi bi-clipboard"></i>
+            </button>
+          </i>
+        </div>
+
+        <div class="social-links d-none d-md-flex align-items-center social-buttons">
+          <a href="https://facebook.com/everlastingacademy" target="_blank" class="btn btn-sm btn-outline-light"
+            title="Facebook">
+            <i class="bi bi-facebook"></i> Facebook
+          </a>
+          <a href="https://wa.me/255719629304" target="_blank" class="btn btn-sm btn-outline-light" title="WhatsApp">
+            <i class="bi bi-whatsapp"></i> WhatsApp
+          </a>
+          <a href="tel:+255719629304" class="btn btn-sm btn-outline-light" title="Call">
+            <i class="bi bi-telephone"></i> Call
+          </a>
+        </div>
+      </div>
+    </div><!-- End Top Bar -->
+
+    <div class="branding d-flex align-items-cente">
+      <div class="container position-relative d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <h1 class="sitename">Everlasting Academy</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu" aria-label="Main navigation">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="departments.html">Academic Programs</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="http://localhost/NEWLY%20CREATED%20WEBSIT%20TO%20FIT%20EVERLASTING/EVERLASTING/WEB%20SITE/news/index.php">News & Events</a></li>
+            <li class="dropdown"><a href="#"><span>More </span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="department-details.html">Enrichment Programs</a></li>
+                <li class="dropdown"><a href="#"><span>Reach Us</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                  <ul>
+                    <li><a href="#">Get Visitor Pass</a></li>
+                    <li class="dropdown"><a href="#"><span>Direct Call</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                      <ul>
+                        <li><a href="tel:+255719629304">+ (255) 719-629-304</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#">Make Appointment</a></li>
+                  </ul>
+                </li>
+                <li><a href="http://localhost/NEWLY%20CREATED%20WEBSIT%20TO%20FIT%20EVERLASTING/EVERLASTING/WEB%20SITE/testimonials.php">Testimonials</a></li>
+                <li><a href="faq.html">Frequently Asked Questions</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#"><span>Systems</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="http://localhost/NEWLY%20CREATED%20WEBSIT%20TO%20FIT%20EVERLASTING/EVERLASTING/WEB%20SITE/srs/script/index.php">School Result System (SRS)</a></li>
+                <li class="dropdown"><a href="#"><span>Admission & Enrollment</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                  <ul>
+                    <li><a href="http://localhost/NEWLY%20CREATED%20WEBSIT%20TO%20FIT%20EVERLASTING/EVERLASTING/WEB%20SITE/application%20form/enrollment-system/public/apply.php">Get Application Form</a></li>
+                    <li><a href="http://localhost/NEWLY%20CREATED%20WEBSIT%20TO%20FIT%20EVERLASTING/EVERLASTING/WEB%20SITE/Admission%20guidline%20pdf%20upload%20system/user/">Admission Guidlines</a></li>
+                    <li><a href="#">Schedule for interview</a></li>
+                    <li><a href="http://localhost/NEWLY%20CREATED%20WEBSIT%20TO%20FIT%20EVERLASTING/EVERLASTING/WEB%20SITE/application%20form/enrollment-system/public/apply.php">Track Online-Application Form</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">Chat with beatrice</a></li>
+              </ul>
+            </li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list" aria-hidden="true"></i>
+        </nav>
+
+      </div>
+    </div>
+  </header>
+
+  <main class="main" id="maincontent" tabindex="-1">
+
+    <!-- Page Title -->
+    <div class="page-title">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1 class="heading-title">Contact</h1>
+              <p class="mb-0">Got a question about our programs or want to enrol? Reach out — we’re happy to help.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <div class="container">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current" aria-current="page">Contact</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row g-5">
+          <div class="col-lg-5">
+            <div class="contact-info-wrapper">
+              <div class="contact-info-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="info-icon"><i class="bi bi-geo-alt"></i></div>
+                <div class="info-content">
+                  <h3>Our Address</h3>
+                  <p>Misigusugu, Kibaha, Pwani — Tanzania</p>
+                </div>
+              </div>
+
+              <div class="contact-info-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="info-icon"><i class="bi bi-envelope"></i></div>
+                <div class="info-content">
+                  <h3>Email Address</h3>
+                  <p>
+                    <a href="mailto:everlastingacademy24@gmail.com" class="btn btn-primary btn-sm">
+                      <i class="bi bi-envelope-fill"></i> everlastingacademy24@gmail.com
+                    </a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="contact-info-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="info-icon"><i class="bi bi-headset"></i></div>
+                <div class="info-content">
+                  <h3>Hours of Operation</h3>
+                  <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+                  <p>Saturday: 9:00 AM - 1:00 PM</p>
+                </div>
+              </div>
+
+              <!-- quick action buttons -->
+              <div class="mt-4 contact-actions" data-aos="fade-up" data-aos-delay="350" role="group" aria-label="Quick contact actions">
+                <a class="btn btn-outline-primary" href="tel:+255719629304" role="button" id="callAction">
+                  <i class="bi bi-telephone-fill"></i> Call +255719629304
+                </a>
+
+                <a class="btn btn-success" href="https://wa.me/255719629304" target="_blank" rel="noopener" role="button">
+                  <i class="bi bi-whatsapp"></i> WhatsApp
+                </a>
+
+                <a class="btn btn-primary" href="https://facebook.com/everlastingacademy" target="_blank" rel="noopener" role="button">
+                  <i class="bi bi-facebook"></i> Facebook
+                </a>
+              </div>
+
+              <!-- share/contact shortcuts -->
+              <div class="mt-3">
+                <small class="text-muted">Shortcuts</small>
+                <div class="d-flex mt-2">
+                  <a class="btn btn-outline-secondary btn-sm me-2" href="sms:+255719629304?body=Hello%20Everlasting%20Academy" title="Send SMS">
+                    <i class="bi bi-chat-dots"></i> SMS
+                  </a>
+                  <a class="btn btn-outline-secondary btn-sm me-2" href="mailto:everlastingacademy24@gmail.com?subject=Enquiry%20from%20website" title="Email with subject">
+                    <i class="bi bi-envelope"></i> Quick Email
+                  </a>
+                  <button class="btn btn-outline-secondary btn-sm" id="getDirectionsBtn" title="Get directions">
+                    <i class="bi bi-compass"></i> Directions
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-lg-7">
+            <div class="contact-form-card" data-aos="fade-up" data-aos-delay="200">
+              <h2>Send us a Message</h2>
+              <p class="mb-4">Have questions or want to learn more? Use the form below and we will get back to you shortly.</p>
+
+              <!-- progressive contact form: AJAX first, fallback to native submit -->
+              <form action="forms/contact.php" method="post" class="php-email-form" id="contactForm" novalidate>
+                <div class="row g-4">
+                  <div class="col-md-6">
+                    <label for="name" class="sr-hidden">Your name</label>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Your Name" required>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="email" class="sr-hidden">Your email</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="subject" class="sr-hidden">Subject</label>
+                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="message" class="sr-hidden">Message</label>
+                    <textarea class="form-control" name="message" id="message" placeholder="Your Message" rows="6" required></textarea>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="loading d-none">Sending message...</div>
+                    <div class="error-message alert alert-danger d-none" role="alert"></div>
+                    <div class="sent-message alert alert-success d-none" role="alert">Your message has been sent. Thank you!</div>
+                  </div>
+
+                  <div class="col-12 d-flex align-items-center justify-content-between">
+                    <button type="submit" class="btn btn-submit">Send Message</button>
+
+                    <!-- alternative contact shortcut buttons next to form -->
+                    <div class="d-flex contact-actions">
+                      <a class="btn btn-outline-primary btn-sm" href="mailto:everlastingacademy24@gmail.com">
+                        <i class="bi bi-envelope-fill"></i> Email Us
+                      </a>
+                      <a class="btn btn-success btn-sm" href="https://wa.me/255719629304" target="_blank" rel="noopener">
+                        <i class="bi bi-whatsapp"></i> WhatsApp
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+              <p class="mt-3 small text-muted">By sending a message you agree to be contacted by Everlasting Academy for enrolment and programme information.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map (Leaflet) + fallback -->
+      <div class="container-fluid map-container" data-aos="fade-up" data-aos-delay="200">
+        <div class="map-overlay"></div>
+
+        <!-- Map actions: open in Google Maps / Apple Maps / share -->
+        <div class="map-actions" role="toolbar" aria-label="Map actions">
+          <a class="btn btn-light btn-sm" id="openGMaps" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=-6.764933,38.8454086">
+            <i class="bi bi-map"></i> Open in Google Maps
+          </a>
+          <a class="btn btn-outline-primary btn-sm" id="openAppleMaps" target="_blank" rel="noopener" href="http://maps.apple.com/?ll=-6.764933,38.8454086">
+            <i class="bi bi-apple"></i> Apple Maps
+          </a>
+          <button class="btn btn-outline-secondary btn-sm" id="shareMapBtn" title="Share location">
+            <i class="bi bi-share-fill"></i> Share
+          </button>
+        </div>
+
+        <!-- interactive map -->
+        <div id="leafletMap" aria-label="Everlasting Academy location map"></div>
+
+        <!-- textual fallback with direct links if JS/Leaflet fails -->
+        <noscript>
+          <div class="container py-4">
+            <p class="alert alert-info">Interactive map requires JavaScript. Open the location in Google Maps:
+              <a href="https://www.google.com/maps/search/?api=1&query=-6.764933,38.8454086" target="_blank" rel="noopener">Open map</a>
+            </p>
+          </div>
+        </noscript>
+      </div>
+
+    </section><!-- /Contact Section -->
+
+  </main>
+
+  <footer id="footer" class="footer-16 footer position-relative">
+    <div class="container">
+      <div class="footer-main" data-aos="fade-up" data-aos-delay="100">
+        <div class="row align-items-start">
+          <div class="col-lg-5">
+            <div class="brand-section">
+              <a href="index.html" class="logo d-flex align-items-center mb-4">
+                <span class="sitename">Everlasting Academy</span>
+              </a>
+              <p class="brand-description">A home to every learner</p>
+
+              <div class="contact-info mt-5">
+                <div class="contact-item"><i class="bi bi-geo-alt"></i><span>Misigusugu - Kibaha - Tanzania</span></div>
+                <div class="contact-item"><i class="bi bi-telephone"></i><span><a href="tel:+255719629304">+255 719 629 304</a></span></div>
+                <div class="contact-item"><i class="bi bi-envelope"></i><span><a href="mailto:everlastingacademy24@gmail.com">everlastingacademy24@gmail.com</a></span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-7">
+            <div class="footer-nav-wrapper">
+              <div class="row">
+                <div class="col-6 col-lg-3">
+                  <div class="nav-column">
+                    <h6>More From us</h6>
+                    <nav class="footer-nav">
+                      <a href="about.html">Our Story</a>
+                      <a href="departments.html">Programs</a>
+                      <a href="#!">News & Events</a>
+                    </nav>
+                  </div>
+                </div>
+
+                <div class="col-6 col-lg-3">
+                  <div class="nav-column">
+                    <h6>Systems</h6>
+                    <nav class="footer-nav">
+                      <a href="#!">Student Result System (SRS)</a>
+                      <a href="#!">Admission and Enrolment</a>
+                      <a href="404.html">E-learning</a>
+                      <a href="#!">Chat with Beatrice</a>
+                    </nav>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="bottom-content" data-aos="fade-up" data-aos-delay="300">
+          <div class="row align-items-center">
+            <div class="col-lg-6">
+              <div class="copyright">
+                <p>© <span class="sitename">Everlasting Academy</span>. All rights reserved.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#!" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" aria-hidden="true"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader" aria-hidden="true"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Leaflet JS (OpenStreetMap) -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-3cGk3b2e3vZs6uJm6q2rZL8EwOQjvazm2uZdY0b2j3g=" crossorigin=""></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    (function () {
+      // constants
+      const PHONE = '+255719629304';
+      const LAT = -6.764933;
+      const LNG = 38.8454086;
+      const PLACE_NAME = 'Everlasting Academy';
+
+      // copy phone button
+      document.getElementById('copyPhoneBtn').addEventListener('click', function () {
+        navigator.clipboard?.writeText(PHONE).then(() => {
+          this.innerHTML = '<i class="bi bi-clipboard-check"></i>';
+          setTimeout(() => this.innerHTML = '<i class="bi bi-clipboard"></i>', 2000);
+        }).catch(() => {
+          alert('Copy failed — please copy manually: ' + PHONE);
+        });
+      });
+
+      // directions button uses user's geolocation if available
+      document.getElementById('getDirectionsBtn').addEventListener('click', function () {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function (pos) {
+            const src = pos.coords.latitude + ',' + pos.coords.longitude;
+            const dest = LAT + ',' + LNG;
+            const gmaps = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(src)}&destination=${encodeURIComponent(dest)}&travelmode=driving`;
+            window.open(gmaps, '_blank', 'noopener');
+          }, function () {
+            // fallback: open Google Maps destination only
+            window.open(`https://www.google.com/maps/search/?api=1&query=${LAT},${LNG}`, '_blank', 'noopener');
+          });
+        } else {
+          window.open(`https://www.google.com/maps/search/?api=1&query=${LAT},${LNG}`, '_blank', 'noopener');
+        }
+      });
+
+      // share map (uses Web Share API if available)
+      document.getElementById('shareMapBtn').addEventListener('click', async function () {
+        const url = `https://www.google.com/maps/search/?api=1&query=${LAT},${LNG}`;
+        if (navigator.share) {
+          try {
+            await navigator.share({ title: PLACE_NAME, text: 'Location: ' + PLACE_NAME, url });
+          } catch (err) {
+            console.log('Share canceled or failed', err);
+          }
+        } else {
+          // fallback: copy to clipboard
+          navigator.clipboard?.writeText(url).then(() => {
+            alert('Map link copied to clipboard');
+          }, () => {
+            prompt('Copy this link:', url);
+          });
+        }
+      });
+
+      // Leaflet map initialization (works without Google)
+      try {
+        const map = L.map('leafletMap', { scrollWheelZoom: false }).setView([LAT, LNG], 16);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        const marker = L.marker([LAT, LNG]).addTo(map);
+        marker.bindPopup(`<strong>${PLACE_NAME}</strong><br>Misigusugu, Kibaha`).openPopup();
+
+        // add a locate control (optional)
+        L.control.locate?.({ position: 'topleft' })?.addTo(map);
+      } catch (e) {
+        console.warn('Leaflet failed to initialize', e);
+        // In case Leaflet blocked, show fallback link (already present in map-actions)
+      }
+
+      // contact form: progressive enhancement - try AJAX, fallback to native submit
+      const form = document.getElementById('contactForm');
+      const loading = document.querySelector('.loading');
+      const errorBox = document.querySelector('.error-message');
+      const successBox = document.querySelector('.sent-message');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault(); // we'll decide whether to handle via AJAX or fallback
+
+        // clear state
+        errorBox.classList.add('d-none'); successBox.classList.add('d-none');
+
+        const formData = new FormData(form);
+        const name = (formData.get('name') || '').toString().trim();
+        const email = (formData.get('email') || '').toString().trim();
+        const subject = (formData.get('subject') || '').toString().trim();
+        const message = (formData.get('message') || '').toString().trim();
+
+        if (!name || !email || !subject || !message) {
+          errorBox.textContent = 'Please complete all fields before submitting.';
+          errorBox.classList.remove('d-none');
+          errorBox.focus();
+          return;
+        }
+
+        // show loading indicator
+        loading.classList.remove('d-none');
+
+        // attempt AJAX submit to forms/contact.php — expecting JSON { success: bool, message: string }
+        fetch(form.action, {
+          method: form.method || 'POST',
+          body: formData,
+          credentials: 'same-origin',
+          headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        }).then(async (res) => {
+          loading.classList.add('d-none');
+
+          // try parse JSON
+          let data;
+          const ct = res.headers.get('content-type') || '';
+          if (ct.includes('application/json')) {
+            data = await res.json();
+          } else {
+            // server returned HTML/text — read text and attempt to detect success
+            const text = await res.text();
+            // heuristic: look for "success" or "sent" in response
+            if (/success|sent|thank/i.test(text)) {
+              data = { success: true, message: 'Message sent (server replied with HTML).' };
+            } else {
+              data = { success: false, message: 'Server returned an unexpected response.' + '\n\n' + text.slice(0, 1000) };
+            }
+          }
+
+          if (data && data.success) {
+            successBox.textContent = data.message || 'Your message has been sent. Thank you!';
+            successBox.classList.remove('d-none');
+            form.reset();
+            window.scrollTo({ top: successBox.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
+          } else {
+            errorBox.textContent = data.message || 'Sending failed — server returned an error.';
+            errorBox.classList.remove('d-none');
+            window.scrollTo({ top: errorBox.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
+          }
+        }).catch((err) => {
+          loading.classList.add('d-none');
+          // network error or CORS — fallback: submit form natively
+          console.warn('AJAX submit failed, falling back to native submit:', err);
+          // inform user and perform native submit
+          if (confirm('Could not submit by AJAX (network or server). Submit using normal form submit instead?')) {
+            // remove our submit handler and submit normally
+            form.removeEventListener('submit', arguments.callee);
+            form.submit();
+          }
+        });
+
+      });
+
+      // small accessibility: focus main heading on load so screen readers land in content
+      document.getElementById('maincontent').focus();
+
+      // initialize AOS if included
+      if (window.AOS) { AOS.init(); }
+
+    })();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academy · Appointment Modal (FormSubmit)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f6f9fc 0%, #e9f2f9 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        /* demo card & nav */
+        .demo-card {
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(6px);
+            padding: 2.5rem 2rem;
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 45px -12px rgba(0,35,65,0.3);
+            border: 1px solid rgba(255,255,255,0.6);
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .brand {
+            font-size: 1.9rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: #0b2b40;
+            margin-bottom: 0.3rem;
+        }
+
+        .brand span {
+            background: #1d5e8f;
+            color: white;
+            font-size: 1rem;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.2rem;
+            padding: 0.7rem 1.5rem;
+            border-radius: 60px;
+            background: white;
+            color: #0b2b40;
+            box-shadow: 0 8px 16px -8px rgba(0,40,70,0.15);
+            transition: all 0.2s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            display: inline-block;
+        }
+
+        nav ul li a:hover {
+            background: #1d5e8f;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 18px 25px -10px #1d5e8faa;
+            border-color: transparent;
+        }
+
+        /* modal overlay – hidden by default */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,20,35,0.6);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.25s ease, visibility 0.25s;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* modal container */
+        .modal-container {
+            background: #ffffff;
+            border-radius: 2rem;
+            max-width: 550px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 35px 70px rgba(0,25,45,0.5);
+            padding: 2rem 2rem 2.2rem;
+            border: 1px solid rgba(255,255,255,0.5);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: #0b2b40;
+            letter-spacing: -0.4px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2.2rem;
+            line-height: 1;
+            cursor: pointer;
+            color: #597a8f;
+            padding: 0 8px;
+            transition: 0.2s;
+        }
+
+        .close-btn:hover {
+            color: #b22;
+            transform: scale(1.2);
+        }
+
+        /* appointment form */
+        .appointment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .form-row label {
+            font-weight: 600;
+            color: #1d4b66;
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+        }
+
+        .form-row input,
+        .form-row select,
+        .form-row textarea {
+            padding: 0.9rem 1rem;
+            border: 1.5px solid #dae5ec;
+            border-radius: 20px;
+            font-size: 1rem;
+            background: #f9fcff;
+            transition: 0.2s;
+            outline: none;
+        }
+
+        .form-row input:focus,
+        .form-row select:focus,
+        .form-row textarea:focus {
+            border-color: #1d5e8f;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(29,94,143,0.15);
+        }
+
+        .form-row textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-submit {
+            background: #1d5e8f;
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 1rem;
+            box-shadow: 0 10px 20px -8px #0a2b40;
+            transition: all 0.2s;
+            border: 1px solid rgba(255,255,255,0.2);
+            letter-spacing: 0.5px;
+        }
+
+        .btn-submit:hover {
+            background: #134670;
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -8px #0a2b40;
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .small-note {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #3c6e8f;
+            background: #e8f0f7;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            text-align: center;
+        }
+
+        .small-note i {
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        /* success message inside modal */
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 50px;
+            padding: 0.8rem 1.2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+        .success-message.show {
+            display: block;
+        }
+
+        /* footer */
+        .footer-note {
+            margin-top: 2rem;
+            color: #2d5975;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="demo-card">
+    <div class="brand">
+        Everlasting Academy <span>v24</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="appointment.html" id="makeAppointmentLink">Make Appointment</a></li>
+            <li><a href="#">Courses</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="footer-note">
+        ⚡ Click "Make Appointment" to open modal form<br> (email via FormSubmit)
+    </div>
+</div>
+
+<!-- MODAL OVERLAY (APPOINTMENT) -->
+<div class="modal-overlay" id="appointmentModal" aria-hidden="true">
+    <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-header">
+            <h2 id="modalTitle">📅 Book an appointment</h2>
+            <button class="close-btn" id="closeModalBtn" aria-label="Close modal">&times;</button>
+        </div>
+
+        <!-- success message (shown after form submission) -->
+        <div class="success-message" id="successMessage">
+            ✅ Your appointment request has been sent!
+        </div>
+
+        <!-- FORM SUBMIT CONFIGURATION -->
+        <form class="appointment-form" action="https://formsubmit.co/everlastingacademy24@gmail.com" method="POST">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="box">
+            <input type="hidden" name="_subject" value="📌 New appointment request from Everlasting Academy">
+            <!-- Redirect back to this page with success flag -->
+            <input type="hidden" name="_next" value="https://127.0.0.1:5500/appointment.html?success=true">
+            
+            <!-- honeypot -->
+            <input type="text" name="_honey" style="display:none">
+
+            <div class="form-row">
+                <label for="fullname">Full name *</label>
+                <input type="text" id="fullname" name="name" required placeholder="e.g. Alex Morgan">
+            </div>
+
+            <div class="form-row">
+                <label for="email">Your email *</label>
+                <input type="email" id="email" name="email" required placeholder="alex@example.com">
+            </div>
+
+            <div class="form-row">
+                <label for="phone">Phone number (optional)</label>
+                <input type="tel" id="phone" name="phone" placeholder="+1 234 567 890">
+            </div>
+
+            <div class="form-row">
+                <label for="appointment-date">Preferred date *</label>
+                <input type="date" id="appointment-date" name="appointment_date" required>
+            </div>
+
+            <div class="form-row">
+                <label for="appointment-time">Preferred time *</label>
+                <input type="time" id="appointment-time" name="appointment_time" required>
+            </div>
+
+            <div class="form-row">
+                <label for="department">Select department</label>
+                <select id="department" name="department">
+                    <option value="admissions">Admissions</option>
+                    <option value="academic_advising">Academic advising</option>
+                    <option value="financial_aid">Financial aid</option>
+                    <option value="international">International office</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label for="message">Additional notes / questions</label>
+                <textarea id="message" name="message" placeholder="I would like to discuss..."></textarea>
+            </div>
+
+            <input type="hidden" name="_replyto" value="email">
+
+            <button type="submit" class="btn-submit">✉️ Send appointment request</button>
+            <div class="small-note">
+                <i>📧</i> FormSubmit will send details directly to <strong>everlastingacademy24@gmail.com</strong>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    (function() {
+        'use strict';
+
+        // DOM elements
+        const modal = document.getElementById('appointmentModal');
+        const openLink = document.getElementById('makeAppointmentLink');
+        const closeBtn = document.getElementById('closeModalBtn');
+        const successMessage = document.getElementById('successMessage');
+
+        // Helper to get previous page URL (referrer) or fallback
+        
+
+        // Helper to open modal
+        function openModal() {
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+            // focus first input for accessibility
+            document.getElementById('fullname')?.focus();
+        }
+
+        // Helper to close modal AND redirect back
+        function closeModalAndGoBack() {
+            const previous = getPreviousPage();
+            window.location.href = previous;
+        }
+
+        // Open modal automatically when page loads
+        window.addEventListener('load', function() {
+            openModal();
+        });
+
+        // If the page was loaded with ?success=true, show the success message inside the modal
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('success') && urlParams.get('success') === 'true') {
+            successMessage.classList.add('show');
+            // Optional: auto-hide the success message after a few seconds, but keep modal open
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 5000);
+        }
+
+        // Event listeners for closing (all trigger redirect)
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                closeModalAndGoBack();
+            });
+        }
+
+        // Click outside modal (on overlay) closes and redirects
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModalAndGoBack();
+            }
+        });
+
+        // Escape key closes and redirects
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.classList.contains('active')) {
+                closeModalAndGoBack();
+            }
+        });
+
+        // Pre-fill date with today as min
+        const dateInput = document.getElementById('appointment-date');
+        if (dateInput) {
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.setAttribute('min', today);
+        }
+
+        // The "Make Appointment" link on this same page can also open the modal (if clicked again)
+        if (openLink) {
+            openLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                openModal();
+            });
+        }
+    })();
+</script>
+
+<!-- Note: For production, change the _next URL to your actual domain. -->
+</body>
+</html>
